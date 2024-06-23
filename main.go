@@ -29,6 +29,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	log.Println("compressing directories...")
 	err = filepath.WalkDir(*FlagDirectory, func(path string, entry fs.DirEntry, _ error) error {
 
 		_, file := filepath.Split(path)
@@ -94,6 +95,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	log.Println("serving files over HTTP")
 	http.Handle("/", http.FileServer(http.Dir("serveme/")))
 
 	http.ListenAndServe(":8080", nil)
